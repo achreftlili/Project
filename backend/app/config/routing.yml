@@ -1,3 +1,18 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+app_post:
+    resource: app.post
+    type:     sylius.api
+    prefix:   /api
+
+app_comment:
+    resource: app.comment
+    type:     sylius.api
+    prefix:   /api
+
+app_tag:
+    resource: app.tag
+    type:     sylius.api
+    prefix:   /api

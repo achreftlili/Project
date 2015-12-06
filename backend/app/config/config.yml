@@ -67,3 +67,18 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    
+sylius_resource:
+    resources:
+        app.post:
+            driver:    doctrine/orm
+            classes:
+                model: AppBundle\Entity\Post
+        app.comment:
+            driver:    doctrine/orm
+            classes:
+                model: AppBundle\Entity\Comment
+        app.tag:
+            driver:    doctrine/orm
+            classes:
+                model: AppBundle\Entity\Tag
