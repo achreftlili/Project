@@ -1,10 +1,33 @@
 <html>
-  <head>
-    <title>Angular 2 QuickStart</title>
-    <script src="node_modules/angular2/bundles/angular2.sfx.dev.js"></script>
-    <script src="app.js"></script>
-  </head>
-  <body>
-    <my-app></my-app>
-  </body>
+    <head>
+        <base href="/">
+        <title>Angular 2 QuickStart</title>
+        <!-- 1. Load libraries -->
+        <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+        <script src="node_modules/systemjs/dist/system.src.js"></script>
+        <script src="node_modules/rxjs/bundles/Rx.js"></script>
+        <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+        <script src="node_modules/angular2/bundles/http.dev.js"></script>
+        <script src="node_modules/angular2/bundles/router.dev.js"></script>
+        <!-- 2. Configure SystemJS -->
+        <script>
+            System.config({
+                packages: {
+                    app: {
+                        format: 'register',
+                        defaultExtension: 'js'
+                    }
+                }
+            });
+            System.import('app/boot')
+                    .then(null, console.error.bind(console));
+        </script>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="app/app-component.css">
+    </head>   
+    <!-- 3. Display the application -->
+    <body>
+
+        <my-app>Loading...</my-app>
+    </body>
 </html>

@@ -1,0 +1,16 @@
+
+
+<div class="container">
+    <div>
+        <h1>Hero Form</h1>
+        <form (ngSubmit)="onSubmit(model)" #productForm="ngForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" required [(ngModel)]="model.name" ngControl="name"  #name="ngForm" >
+                       <div [hidden]="name.valid" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>  
+            <button type="submit" class="btn btn-default" [disabled]="!productForm.form.valid">Submit</button>
+        </form>
+    </div>

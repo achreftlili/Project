@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">My angular 2 app</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div>
+        <h1>Hero Form</h1>
+        <form (ngSubmit)="onSubmit(model)" #productForm="ngForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" required [(ngModel)]="model.name" ngControl="name"  #name="ngForm" >
+                       <div [hidden]="name.valid" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>  
+            <button type="submit" class="btn btn-default" [disabled]="!productForm.form.valid">Submit</button>
+        </form>
+    </div>

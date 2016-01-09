@@ -1,0 +1,68 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+
+# Examples of API resource mapping, learn more at
+# https://github.com/dunglas/DunglasApiBundle
+
+    resource.produit:
+        parent:    "api.resource"
+        arguments: [ "AppBundle\\Entity\\Product" ]
+        tags:      [ { name: "api.resource" } ]
+
+#    resource.offer:
+#        parent:    "api.resource"
+#        arguments: [ "AppBundle\\Entity\\Offer" ]
+#        tags:      [ { name: "api.resource" } ]
+
+    resource.offer.collection_offer.get:
+        class:     "Dunglas\ApiBundle\Api\Operation\Operation"
+        public:    false
+        factory:   [ "@api.operation_factory", "createCollectionOperation" ]
+        arguments: [ "@resource.offer", "GET" ]
+
+
+    resource.offer.item_operation.custom_get:
+        class:   "Dunglas\ApiBundle\Api\Operation\Operation"
+        public:  false
+        factory: [ "@api.operation_factory", "createItemOperation" ]
+        arguments:
+            -    "@resource.offer"               # Resource
+            -    [ "GET", "HEAD" ]                 # Methods
+            -    "/offers/{id}/custom"           # Path
+            -    "AppBundle:Offer:custom"         # Controller
+            -    "my_custom_route"                 # Route name
+            -    # Context (will be present in Hydra documentation)
+                 "@type":       "hydra:Operation"
+                 "hydra:title": "A custom operation"
+                 "returns":     "xmls:string"
+                 
+    resource.offer.search_filter:
+        parent:    "api.doctrine.orm.search_filter"
+        arguments: [ {  description: "partial"  } ]
+        
+    resource.offer:
+        parent:    "api.resource"
+        arguments: [ "AppBundle\Entity\Offer" ]
+        calls:
+
+            -      method:    "initItemOperations"
+                   arguments:  [ [ "@resource.offer.collection_offer.get" ,"@resource.offer.item_operation.custom_get" ]   ]      
+            -      method:    "initFilters"
+                   arguments: [ [ "@resource.offer.search_filter" ] ]
+        tags:      [ { name: "api.resource" } ]
+        
+
+
+    
+
+
+
+
+# A typical service
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
