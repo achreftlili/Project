@@ -9,7 +9,18 @@
     </thead>
     <tbody>
         <tr *ngFor="#product of products ">
-            <td>{{ product.name }}</td><td><button class="danger" (click)="deleteClicked(product['@id'])">Delete</button></td>
-        </tr>
+            <td>{{ product.name }}</td>
+            <td><button class="btn btn-danger" (click)="deleteClicked(product['@id'])">Delete</button></td>
+            <td><button class="btn btn-r"  (click)="editClicked(product['@id'])">Edit</button></td>        </tr>
     </tbody>
 </table>
+
+<hr/>
+<button class="btn btn-info" (click)="addClicked()">Add product</button>
+<div [hidden]="!active">
+    <product-form (added)="getList()"></product-form>
+</div>
+
+<div [hidden]="!activeEdit">
+    <product-edit [idProduct]="idProductSelected" (edited)="getList()"></product-edit>
+</div>

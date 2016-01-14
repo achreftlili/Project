@@ -1,9 +1,11 @@
-    import {Component} from 'angular2/core';
+    import {Component ,Output,EventEmitter} from 'angular2/core';
     import {NgForm}    from 'angular2/common';
     import {Http, Response, HTTP_PROVIDERS} from "angular2/http";
     import 'rxjs/add/operator/map';
     import { Product }  from '../Entity/product';
     import {ROUTER_DIRECTIVES} from 'angular2/router';
+    import {  ProductsService } from '../services/Service';
+
     @Component({
       providers: [HTTP_PROVIDERS, ROUTER_DIRECTIVES],
       selector: 'product-form',
@@ -11,24 +13,20 @@
     })
     export class ProductFormComponent {
     public products :Object;
-         constructor(public http: Http) {
-                     }
-            
-
+    @Output() added = new EventEmitter();
+    constructor(public http: Http, public productsService: ProductsService) {}
 
         model = new Product();
         onSubmit(model) {
-        let product = new Product(model.id, model.name);
-        this.http.post('http://localhost:8000/products', JSON.stringify(product))
-            .map(res => res.json())
-            .subscribe(
-                       data => this.succes(data)            
-           );
-
-          }
+            let product = new Product(model.id, model.name);
+            this.productsService.addproduct(product).subscribe(
+                       res => this.succesAdd(res)            
+            );
+        model.name=null;
+        }
         
-        succes(data) {
-                console.log(data);
+        succesAdd(data) {
+            this.added.next();
           }
         
     }

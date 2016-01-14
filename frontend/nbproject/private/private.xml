@@ -7,6 +7,7 @@
             <file>file:/var/www/html/Project/frontend/app/boot.js</file>
             <file>file:/var/www/html/Project/frontend/app/modules/products/ts/Entity/product.js</file>
             <file>file:/var/www/html/Project/frontend/app/app.component.js</file>
+            <file>file:/var/www/html/Project/frontend/app/modules/products/ts/components/Templates/product-edit-component.html</file>
             <file>file:/var/www/html/Project/frontend/app/app-component.html</file>
             <file>file:/var/www/html/Project/frontend/app/product.ts</file>
             <file>file:/var/www/html/Project/frontend/app/modules/products/ts/components/Templates/product-form-component.html</file>
@@ -17,7 +18,9 @@
             <file>file:/var/www/html/Project/frontend/app/modules/products/ts/Entity/product.ts</file>
             <file>file:/var/www/html/Project/frontend/index.html</file>
             <file>file:/var/www/html/Project/frontend/app/modules/products/ts/services/Service.ts</file>
+            <file>file:/var/www/html/Project/frontend/app/modules/products/ts/components/product-edit.component.ts</file>
             <file>file:/var/www/html/Project/frontend/app/modules/products/ts/components/Templates/product-list-component.html</file>
+            <file>file:/var/www/html/Project/frontend/app/product-form.component.ts</file>
         </group>
     </open-files>
 </project-private>

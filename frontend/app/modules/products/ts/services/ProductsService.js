@@ -31,6 +31,18 @@ System.register(['angular2/core', "angular2/http"], function(exports_1) {
                     return this.http.delete('http://localhost:8000' + id)
                         .map(function (res) { return res.text(); });
                 };
+                ProductsService.prototype.addproduct = function (product) {
+                    return this.http.post('http://localhost:8000/products', JSON.stringify(product))
+                        .map(function (res) { return res.json(); });
+                };
+                ProductsService.prototype.getproduct = function (ids) {
+                    return this.http.get('http://localhost:8000' + ids)
+                        .map(function (res) { return res.json(); });
+                };
+                ProductsService.prototype.editproduct = function (product) {
+                    return this.http.put('http://localhost:8000/products/' + product.id, JSON.stringify(product))
+                        .map(function (res) { return res.json(); });
+                };
                 ProductsService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

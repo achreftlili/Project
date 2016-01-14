@@ -13,10 +13,7 @@ import {ROUTER_DIRECTIVES, Router, Location} from 'angular2/router';
                             </div>
                             <div>
                                 <ul class="nav navbar-nav">
-                                    <li class="active">
-                                        <a class="nav-link"  [routerLink]="['/ProductForm']">Add Product</a>
-                                    </li>
-                                    <li>
+                                    <li  class="active">
                                         <a class="nav-link"  [routerLink]="['/ProductList']">Products</a>
                                     </li>
                                 </ul>

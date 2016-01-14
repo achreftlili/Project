@@ -9,7 +9,7 @@ System.register(['angular2/core', "angular2/http", 'rxjs/add/operator/map', '../
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1, product_1, router_1, Service_1;
-    var ProductFormComponent;
+    var ProductEditComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -29,38 +29,56 @@ System.register(['angular2/core', "angular2/http", 'rxjs/add/operator/map', '../
                 Service_1 = Service_1_1;
             }],
         execute: function() {
-            ProductFormComponent = (function () {
-                function ProductFormComponent(http, productsService) {
+            ProductEditComponent = (function () {
+                function ProductEditComponent(http, productsService) {
                     this.http = http;
                     this.productsService = productsService;
-                    this.added = new core_1.EventEmitter();
+                    this.edited = new core_1.EventEmitter();
                     this.model = new product_1.Product();
                 }
-                ProductFormComponent.prototype.onSubmit = function (model) {
+                ProductEditComponent.prototype.onSubmit = function (model) {
                     var _this = this;
                     var product = new product_1.Product(model.id, model.name);
-                    this.productsService.addproduct(product).subscribe(function (res) { return _this.succesAdd(res); });
+                    this.productsService.editproduct(product).subscribe(function (res) { return _this.succesEdit(res); });
                     model.name = null;
                 };
-                ProductFormComponent.prototype.succesAdd = function (data) {
-                    this.added.next();
+                Object.defineProperty(ProductEditComponent.prototype, "idProduct", {
+                    get: function () {
+                        return this._idProduct;
+                    },
+                    set: function (productId) {
+                        var _this = this;
+                        // Here we are
+                        if (productId != 'vide' && typeof productId !== 'undefined') {
+                            console.log("ee");
+                            this._idProduct = productId;
+                            this.model = this.productsService.getproduct(productId)
+                                .subscribe(function (res) { return _this.model = new product_1.Product(res['@id'].substr(res['@id'].lastIndexOf("/") + 1), res.name); });
+                        }
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                ProductEditComponent.prototype.succesEdit = function (data) {
+                    this.edited.next();
                 };
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)
-                ], ProductFormComponent.prototype, "added", void 0);
-                ProductFormComponent = __decorate([
+                ], ProductEditComponent.prototype, "edited", void 0);
+                ProductEditComponent = __decorate([
                     core_1.Component({
                         providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_DIRECTIVES],
-                        selector: 'product-form',
-                        templateUrl: './app/modules/products/ts/components/Templates/product-form-component.html'
+                        selector: 'product-edit',
+                        properties: ['idProduct'],
+                        templateUrl: './app/modules/products/ts/components/Templates/product-edit-component.html'
                     }), 
                     __metadata('design:paramtypes', [http_1.Http, Service_1.ProductsService])
-                ], ProductFormComponent);
-                return ProductFormComponent;
+                ], ProductEditComponent);
+                return ProductEditComponent;
             })();
-            exports_1("ProductFormComponent", ProductFormComponent);
+            exports_1("ProductEditComponent", ProductEditComponent);
         }
     }
 });
-//# sourceMappingURL=product-form.component.js.map
+//# sourceMappingURL=product-edit.component.js.map
